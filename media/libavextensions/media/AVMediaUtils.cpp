@@ -42,6 +42,9 @@
 #include <media/AudioTrack.h>
 #include <media/mediarecorder.h>
 
+/*TODO: Following piece check in future with CM, actually following include belongs to AVMediaExtensions.h*/
+#include <audio_utils/format.h> 
+
 #include "common/ExtensionsLoader.hpp"
 #include "media/AVMediaExtensions.h"
 
