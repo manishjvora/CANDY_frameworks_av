@@ -265,7 +265,6 @@ status_t SampleTable::setSampleToChunkParams(
               (unsigned long long)kMaxTotalSize);
         return ERROR_OUT_OF_RANGE;
     }
-
     mSampleToChunkEntries =
         new (std::nothrow) SampleToChunkEntry[mNumSampleToChunkOffsets];
     if (!mSampleToChunkEntries) {
