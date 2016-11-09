@@ -58,19 +58,15 @@ status_t MediaHTTP::connect(
         extHeaders.add(String8("User-Agent"), String8(MakeUserAgent().c_str()));
     }
 
-    mLastURI = uri;
-    // reconnect() calls with uri == old mLastURI.c_str(), which gets zapped
-    // as part of the above assignment. Ensure no accidental later use.
-    uri = NULL;
-
-    bool success = mHTTPConnection->connect(mLastURI.c_str(), &extHeaders);
+    bool success = mHTTPConnection->connect(uri, &extHeaders);
 
     mLastHeaders = extHeaders;
+    mLastURI = uri;
 
     mCachedSizeValid = false;
 
     if (success) {
-        AString sanitized = uriDebugString(mLastURI);
+        AString sanitized = uriDebugString(uri);
         mName = String8::format("MediaHTTP(%s)", sanitized.c_str());
     }
 
