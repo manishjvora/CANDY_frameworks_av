@@ -212,6 +212,7 @@ OMXNodeInstance::OMXNodeInstance(
       mNodeID(0),
       mHandle(NULL),
       mObserver(observer),
+      mDying(false),
       mSailed(false),
       mQueriedProhibitedExtensions(false),
       mBufferIDCount(0)
@@ -1216,6 +1217,12 @@ status_t OMXNodeInstance::allocateSecureBuffer(
         void **buffer_data, sp<NativeHandle> *native_handle) {
     if (buffer == NULL || buffer_data == NULL || native_handle == NULL) {
         ALOGE("b/25884056 %d", __LINE__);
+        return BAD_VALUE;
+    }
+
+    if (portIndex >= NELEM(mSecureBufferType)) {
+        ALOGE("b/31385713, portIndex(%u)", portIndex);
+        android_errorWriteLog(0x534e4554, "31385713");
         return BAD_VALUE;
     }
 
